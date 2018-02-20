@@ -6,8 +6,8 @@
 ## Getting started
 ### Prerequisites
 - Install [Sencha Cmd](https://www.sencha.com/products/extjs/cmd-download) (6.5.3)
-- Download [Sencha Ext JS](https://ext4all.com/ext/download/ext-6.2.0-gpl.zip) (6.2.0 GPL).  We recommend
- extracting Ext JS into a `"sencha-sdks"` folder in your home directory.
+- Download [Sencha ExtJS](https://ext4all.com/ext/download/ext-6.2.0-gpl.zip) (6.2.0 GPL).  I recommend
+ extracting ExtJS into a `"sencha-sdks"` folder in your home directory.
 
 On Windows the "~" part of the path will be replaced by something like "C:\Users\Me\".
 
