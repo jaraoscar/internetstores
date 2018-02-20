@@ -1,0 +1,16 @@
+/**
+ * Selector styling for panel headers.
+ */
+.x-panel-header-default {
+	text-align: center;
+	background: #000 !important;
+	color: #fff !important;
+}
+
+.left-border {
+	border-left: 1px dotted;
+}
+
+.product-icon { background-image: url('../images/16x16/products.png'); }
+.edit-icon { background-image: url('../images/16x16/edit.png'); }
+.save-icon { background-image: url('../images/16x16/save.png'); }
