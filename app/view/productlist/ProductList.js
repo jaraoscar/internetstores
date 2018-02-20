@@ -1,3 +1,7 @@
+/**
+ * ProductList view
+ * @class
+ */
 Ext.define('internetstores.view.productlist.ProductList', {
     extend: 'Ext.Container',
     controller: 'productlist',
@@ -6,12 +10,17 @@ Ext.define('internetstores.view.productlist.ProductList', {
 
     fullscreen: true,
 
+    /** @inheritdoc */
     initComponent: function() {
         this.items = this.createItems();
 
         this.callParent(arguments);
     },
 
+    /**
+     * Used to get the component items
+     * @returns {Object[]}
+     */
     createItems: function() {
         return [{
             xtype: 'panel',
@@ -101,27 +110,40 @@ Ext.define('internetstores.view.productlist.ProductList', {
                 items: ['->', {
                     iconCls: 'save-icon',
                     text: 'Save',
-                    disabled: false,
                     handler: 'onUpdateProduct'
                 }]
             }]
         }];
     },
 
+    /**
+     * OnlineDate field 'render' event handler
+     * NOTE: This is used just to set a tooltip
+     */
     onOnlineDateRender: function(field) {
         field.getEl().set({'data-qtip': 'The Online Date cannot be before today'});
     },
 
+    /**
+     * ProductName field validator
+     * NOTE: The value should not be empty
+     * @returns {Boolean/String} `true` if conditions are valid or an error message
+     */
     onValidateProductName: function(value) {
         value = Ext.String.trim(value || '');
         
         return value ? true : 'Empty values are not allowed';
     },
 
+    /**
+     * ProductPrice field validator
+     * NOTE: The value should be numeric, not empty and greater than zero
+     * @returns {Boolean/String} `true` if conditions are valid or an error message
+     */
     onValidateProductPrice: function(value) {
         value = Ext.String.trim(value || '');
         value = parseFloat(value);
 
-        return (!!value && value > 0) ? true : 'Value should be numeric and greater than zero';
+        return (!!value && value > 0) ? true : 'The value should be numeric and greater than zero';
     }
 });

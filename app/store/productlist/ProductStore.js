@@ -1,3 +1,7 @@
+/**
+ * Product store
+ * @class
+ */
 Ext.define('internetstores.store.productlist.ProductStore', {
     extend: 'Ext.data.Store',
     model: 'internetstores.model.productlist.Product',

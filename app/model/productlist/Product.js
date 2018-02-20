@@ -1,3 +1,7 @@
+/**
+ * Product model
+ * @class
+ */
 Ext.define('internetstores.model.productlist.Product', {
     extend: 'Ext.data.Model',
     idProperty: 'id',

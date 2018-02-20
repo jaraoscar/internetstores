@@ -1,26 +1,63 @@
+/**
+ * ComboBoxFilter custom component for grid columns
+ * @class
+ */
 Ext.define('internetstores.view.productlist.grid.ComboBoxFilter', {
     extend: 'Ext.grid.filters.filter.SingleFilter',
     alias: 'grid.filter.combobox',
 
+    /**
+     * @private
+     * @property {String} type
+     * The custom filter type
+     */
     type: 'combobox',
 
+    /**
+     * @private
+     * @property {String} operator
+     * The custom filter operator
+     * NOTE: Take a look at the {@link Ext.grid.filters.filter.SingleFilter} implementation
+     */
     operator: '==',
 
+    /**
+     * @property {Object} itemDefaults
+     * Contains the default component properties
+     */
     itemDefaults: {
         emptyText: 'Select Item',
         iconCls: Ext.String.format('{0}{1}', Ext.baseCSSPrefix, 'grid-filters-find')
     },
 
     config: {
+        /**
+         * @property {Ext.data.Store} store 
+         * The grid store to be used
+         */
         store: null,
+
+        /**
+         * @property {String} displayField
+         * The model atribute from the grid store that will be used 
+         * as the display value for the combobox records
+         */
         displayField: null,
+
+        /**
+         * @property {String} valueField
+         * The model atribute from the grid store that will be used 
+         * as the value to be obtained from a combobox record
+         */
         valueField: null
     },
 
-    activateMenu: function () {
+    /** @override */
+    activateMenu: function() {
         this.inputItem.setValue(this.filter.getValue());
     },
 
+    /** @override */
     createMenu: function() {
         this.callParent();
 
@@ -48,7 +85,8 @@ Ext.define('internetstores.view.productlist.grid.ComboBoxFilter', {
         });
     },
 
-    setValue: function (value) {
+    /** @override */
+    setValue: function(value) {
         if (this.inputItem) {
             this.inputItem.setValue(value);
         }
@@ -63,6 +101,7 @@ Ext.define('internetstores.view.productlist.grid.ComboBoxFilter', {
         }
     },
 
+    /** @override */
     createFilter: function(cfg, key) {
         if (Ext.isDefined(this.filterFn)) {
             return Ext.create('Ext.util.Filter', {

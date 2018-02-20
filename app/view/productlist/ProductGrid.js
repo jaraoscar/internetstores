@@ -1,3 +1,7 @@
+/**
+ * ProductGrid component
+ * @class
+ */
 Ext.define('internetstores.view.productlist.ProductGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.productgrid',
@@ -20,15 +24,29 @@ Ext.define('internetstores.view.productlist.ProductGrid', {
     bind: '{productStore}',
     plugins: 'gridfilters',
 
+    /**
+     * @private
+     * @constant {String} DEFAULT_DATE_FORMAT 
+     * The format used for displaying dates
+     */
+    DEFAULT_DATE_FORMAT: 'd-m-Y',
+
+    /** @inheritdoc */
     initComponent: function() {
         this.columns = this.createColumns();
         this.dockedItems = this.createDockedItems();
 
         this.callParent(arguments);
 
+        // Load data for the first time
         this.loadInventory();
     },
 
+    /**
+     * @private
+     * Used to get the component columns
+     * @returns {Object[]} columns
+     */
     createColumns: function() {
         var columns = this.getColumnsCfg();
 
@@ -43,15 +61,25 @@ Ext.define('internetstores.view.productlist.ProductGrid', {
         return columns;
     },
 
+    /**
+     * @private
+     * Used to get the component columns
+     * @returns {Object[]} columns
+     */
     createDockedItems: function() {
         return [{
             xtype: 'pagingtoolbar',
             bind: '{productStore}',
-            dock: 'bottom',
+            dock: 'top',
             displayInfo: true
         }];
     },
 
+    /**
+     * @private
+     * Used to get the component columns definition
+     * @returns {Object[]}
+     */
     getColumnsCfg: function() {
         return [{
             dataIndex: 'id',
@@ -71,11 +99,11 @@ Ext.define('internetstores.view.productlist.ProductGrid', {
             filter: {
                 type: 'date'
             },
-            renderer: Ext.util.Format.dateRenderer('d-m-Y')
+            renderer: Ext.util.Format.dateRenderer(this.DEFAULT_DATE_FORMAT)
         }, {
             dataIndex: 'online_date',
             text: 'Online Date',
-            renderer: Ext.util.Format.dateRenderer('d-m-Y')
+            renderer: Ext.util.Format.dateRenderer(this.DEFAULT_DATE_FORMAT)
         }, {
             dataIndex: 'user_created',
             text: 'Create User',
@@ -88,6 +116,10 @@ Ext.define('internetstores.view.productlist.ProductGrid', {
         }];
     },
 
+    /**
+     * Used to fetch data from the server
+     * NOTE: This sets the grid into a loading state until the data is fetched
+     */
     loadInventory: function() {
         this.setLoading(true);
         
@@ -99,6 +131,7 @@ Ext.define('internetstores.view.productlist.ProductGrid', {
                     var inventory = Ext.decode(response.responseText), 
                         store = this.getViewModel().getStore('productStore');
 
+                    // Load the store with the inventory
                     store.getProxy().setData(inventory);
                     store.load();
                 }

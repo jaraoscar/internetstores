@@ -1,16 +1,29 @@
+/**
+ * ProductList controller
+ * @class
+ */
 Ext.define('internetstores.controller.productlist.ProductList', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.productlist',
 
-    onProductGridSelectionChange: function(grid, selected, eOpts) {
+    /**
+     * Product grid 'selectionchange' event handler
+     */
+    onProductGridSelectionChange: function() {
         this.displayFormAndMapProduct();
     },
 
-    onProductGridRowDoubleClick: function(grid, record, element, rowIndex, e, eOpts) {
+    /**
+     * Product grid 'rowdblclick' event handler
+     */
+    onProductGridRowDoubleClick: function() {
         this.displayFormAndMapProduct();
     },
 
-    onUpdateProduct: function(button, e) {
+    /**
+     * Product form save button handler
+     */
+    onUpdateProduct: function() {
         var record = this.getProductRecord(),
             form = this.getProductForm();
 
@@ -27,6 +40,9 @@ Ext.define('internetstores.controller.productlist.ProductList', {
         }
     },
 
+    /**
+     * Used to show the product form and map the record with it
+     */
     displayFormAndMapProduct: function() {
         var record = this.getProductRecord(),
             form = this.getProductForm();
@@ -37,6 +53,10 @@ Ext.define('internetstores.controller.productlist.ProductList', {
         }
     },
 
+    /**
+     * Used to get the selected record from the product grid
+     * @returns {internetstores.model.productlist.Product} record
+     */
     getProductRecord: function() {
         var grid = this.getView().down('#productgrid'),
             selected = grid.getSelectionModel().getSelection(),
@@ -49,6 +69,10 @@ Ext.define('internetstores.controller.productlist.ProductList', {
         return record;
     },
 
+    /**
+     * Used to get the product form
+     * @returns {Ext.form.Panel}
+     */
     getProductForm: function() {
         return this.getView().down('#productform');
     }
