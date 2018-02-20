@@ -14,7 +14,7 @@ On Windows the "~" part of the path will be replaced by something like "C:\Users
 ### Configure the app
 Install the Ext JS framework for the application:
 
-    $ cd extjs-sample
+    $ cd internetstores
     $ sencha app install ~/sencha-sdks
     or
     $ sencha app upgrade ~/sencha-sdks/ext-<version of the sdk>
